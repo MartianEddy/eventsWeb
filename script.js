@@ -1,5 +1,37 @@
 // Smooth scrolling for navigation links
 document.addEventListener('DOMContentLoaded', function() {
+    // Handle urgent CTA strip
+    const urgentStrip = document.querySelector('.urgent-cta-strip');
+    const header = document.querySelector('.header');
+    const closeBtn = document.querySelector('.close-strip');
+    
+    // Initially show the urgent strip and adjust header position
+    if (urgentStrip && header) {
+        header.classList.add('with-urgent-strip');
+        
+        // Handle close button
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                urgentStrip.style.transform = 'translateY(-100%)';
+                urgentStrip.style.opacity = '0';
+                header.classList.remove('with-urgent-strip');
+                
+                setTimeout(() => {
+                    urgentStrip.style.display = 'none';
+                }, 300);
+                
+                // Store in localStorage to remember user preference
+                localStorage.setItem('urgentStripClosed', 'true');
+            });
+        }
+        
+        // Check if user previously closed the strip
+        if (localStorage.getItem('urgentStripClosed') === 'true') {
+            urgentStrip.style.display = 'none';
+            header.classList.remove('with-urgent-strip');
+        }
+    }
+
     // Handle navigation clicks
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
@@ -10,7 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (targetSection) {
                 const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = targetSection.offsetTop - headerHeight;
+                const urgentStripHeight = urgentStrip && urgentStrip.style.display !== 'none' ? urgentStrip.offsetHeight : 0;
+                const totalOffset = headerHeight + urgentStripHeight;
+                const targetPosition = targetSection.offsetTop - totalOffset;
                 
                 window.scrollTo({
                     top: targetPosition,
@@ -121,7 +155,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add scroll effect to header
     let lastScrollTop = 0;
-    const header = document.querySelector('.header');
     
     window.addEventListener('scroll', function() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -214,6 +247,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         }
+    }
+
+    // Add urgent CTA tracking
+    const urgentBtn = document.querySelector('.urgent-btn');
+    if (urgentBtn) {
+        urgentBtn.addEventListener('click', function() {
+            // Track urgent CTA clicks (could integrate with analytics)
+            console.log('Urgent CTA clicked - SMS tent inquiry');
+            
+            // Add visual feedback
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+        });
     }
 
     // Simple mobile menu toggle (if needed in future)
