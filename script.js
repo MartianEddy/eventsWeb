@@ -20,6 +20,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Handle gallery tabs
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const targetTab = this.getAttribute('data-tab');
+            
+            // Remove active class from all buttons and contents
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Add active class to clicked button and corresponding content
+            this.classList.add('active');
+            document.getElementById(targetTab).classList.add('active');
+        });
+    });
+
     // Handle form submission
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
@@ -29,12 +47,13 @@ document.addEventListener('DOMContentLoaded', function() {
             // Get form data
             const formData = new FormData(this);
             const name = this.querySelector('input[type="text"]').value;
-            const email = this.querySelector('input[type="email"]').value;
             const phone = this.querySelector('input[type="tel"]').value;
+            const date = this.querySelector('input[type="date"]').value;
+            const guests = this.querySelector('input[type="number"]').value;
             const message = this.querySelector('textarea').value;
             
             // Simple validation
-            if (!name || !email || !message) {
+            if (!name || !phone || !date || !guests || !message) {
                 alert('Please fill in all required fields.');
                 return;
             }
@@ -46,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.disabled = true;
             
             setTimeout(() => {
-                alert('Thank you for your message! We\'ll get back to you soon.');
+                alert('Thank you for your quote request! We\'ll contact you within 2 hours with pricing and availability.');
                 this.reset();
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
@@ -87,8 +106,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
-    // Observe service cards and contact items
-    const animatedElements = document.querySelectorAll('.service-card, .contact-item, .about-text, .about-image');
+    // Observe service cards, contact items, timeline items, and gallery items
+    const animatedElements = document.querySelectorAll('.service-card, .contact-item, .about-text, .about-image, .timeline-item, .gallery-item');
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
