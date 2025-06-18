@@ -361,7 +361,9 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
+            <h2 class="section-title">Get Quick Callback</h2>
+            <p class="contact-subtitle">Fill out this simple form and we'll call you back within 15 minutes</p>
+            
             <div class="contact-content">
                 <div class="contact-info">
                     <div class="contact-item">
@@ -386,24 +388,51 @@
                         </div>
                     </div>
                 </div>
-                <form class="contact-form">
-                    <div class="form-group">
-                        <input type="text" placeholder="Your Name" required>
+                
+                <!-- Minimal Contact Form -->
+                <div class="quick-callback-form">
+                    <div class="form-header">
+                        <div class="form-icon">⚡</div>
+                        <h3>Request Callback in 15 Minutes</h3>
+                        <p>We'll call you back with pricing and availability</p>
                     </div>
-                    <div class="form-group">
-                        <input type="tel" placeholder="Your Phone Number" required>
+                    
+                    <form class="callback-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" name="name" placeholder="Your Name" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="tel" name="phone" placeholder="Phone Number (Required)" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <select name="event_type" required>
+                                    <option value="">Select Event Type</option>
+                                    <option value="wedding">Wedding</option>
+                                    <option value="school">School Event</option>
+                                    <option value="exhibition">Exhibition/Trade Show</option>
+                                    <option value="corporate">Corporate Event</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="callback-btn">
+                            <span class="btn-icon">📞</span>
+                            Request Callback in 15 Mins
+                        </button>
+                    </form>
+                    
+                    <div class="direct-contact-note">
+                        <p>Prefer direct contact? <a href="tel:+254712345678">Call 0712-345-678</a></p>
                     </div>
-                    <div class="form-group">
-                        <input type="date" placeholder="Event Date" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="number" placeholder="Expected Guests" min="300" max="5000" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea placeholder="Tell us about your event and what you need" rows="4" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Get Quote</button>
-                </form>
+                </div>
             </div>
         </div>
     </section>

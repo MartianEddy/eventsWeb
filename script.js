@@ -118,37 +118,44 @@ document.addEventListener('DOMContentLoaded', function() {
     // Auto-play testimonials (optional)
     setInterval(nextSlide, 8000); // Change slide every 8 seconds
 
-    // Handle form submission
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+    // Handle callback form submission
+    const callbackForm = document.querySelector('.callback-form');
+    if (callbackForm) {
+        callbackForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
             // Get form data
-            const formData = new FormData(this);
-            const name = this.querySelector('input[type="text"]').value;
-            const phone = this.querySelector('input[type="tel"]').value;
-            const date = this.querySelector('input[type="date"]').value;
-            const guests = this.querySelector('input[type="number"]').value;
-            const message = this.querySelector('textarea').value;
+            const name = this.querySelector('input[name="name"]').value;
+            const phone = this.querySelector('input[name="phone"]').value;
+            const eventType = this.querySelector('select[name="event_type"]').value;
             
             // Simple validation
-            if (!name || !phone || !date || !guests || !message) {
+            if (!name || !phone || !eventType) {
                 alert('Please fill in all required fields.');
                 return;
             }
             
+            // Phone number validation (basic Kenyan format)
+            const phoneRegex = /^(\+254|0)[17]\d{8}$/;
+            if (!phoneRegex.test(phone.replace(/\s/g, ''))) {
+                alert('Please enter a valid Kenyan phone number (e.g., 0712345678 or +254712345678)');
+                return;
+            }
+            
             // Simulate form submission
-            const submitBtn = this.querySelector('.btn-primary');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
+            const submitBtn = this.querySelector('.callback-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="btn-icon">⏳</span>Requesting Callback...';
             submitBtn.disabled = true;
             
             setTimeout(() => {
-                alert('Thank you for your quote request! We\'ll contact you within 2 hours with pricing and availability.');
+                alert(`Thank you ${name}! We'll call you back at ${phone} within 15 minutes to discuss your ${eventType} event.`);
                 this.reset();
-                submitBtn.textContent = originalText;
+                submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
+                
+                // Track callback request (could integrate with analytics)
+                console.log('Callback requested:', { name, phone, eventType });
             }, 2000);
         });
     }
@@ -186,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, observerOptions);
 
     // Observe service cards, contact items, timeline items, gallery items, and testimonials
-    const animatedElements = document.querySelectorAll('.service-card, .contact-item, .about-text, .about-image, .timeline-item, .gallery-item, .testimonial-slide, .testimonial-incentive');
+    const animatedElements = document.querySelectorAll('.service-card, .contact-item, .about-text, .about-image, .timeline-item, .gallery-item, .testimonial-slide, .testimonial-incentive, .quick-callback-form');
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
@@ -263,6 +270,39 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 150);
         });
     }
+
+    // Add form field enhancements
+    const formInputs = document.querySelectorAll('.form-group input, .form-group select');
+    formInputs.forEach(input => {
+        // Add floating label effect
+        input.addEventListener('focus', function() {
+            this.parentElement.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', function() {
+            if (!this.value) {
+                this.parentElement.classList.remove('focused');
+            }
+        });
+        
+        // Phone number formatting for Kenyan numbers
+        if (input.type === 'tel') {
+            input.addEventListener('input', function() {
+                let value = this.value.replace(/\D/g, ''); // Remove non-digits
+                
+                // Format as Kenyan number
+                if (value.startsWith('254')) {
+                    value = '+' + value;
+                } else if (value.startsWith('0')) {
+                    // Keep as is for local format
+                } else if (value.length > 0) {
+                    value = '0' + value;
+                }
+                
+                this.value = value;
+            });
+        }
+    });
 
     // Simple mobile menu toggle (if needed in future)
     const createMobileMenu = () => {
@@ -349,6 +389,24 @@ const utils = {
             rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
+    },
+    
+    // Format phone number for display
+    formatPhoneNumber: function(phone) {
+        // Remove all non-digits
+        const cleaned = phone.replace(/\D/g, '');
+        
+        // Format as +254 XXX XXX XXX
+        if (cleaned.startsWith('254') && cleaned.length === 12) {
+            return `+${cleaned.slice(0, 3)} ${cleaned.slice(3, 6)} ${cleaned.slice(6, 9)} ${cleaned.slice(9)}`;
+        }
+        
+        // Format as 0XXX XXX XXX
+        if (cleaned.startsWith('0') && cleaned.length === 10) {
+            return `${cleaned.slice(0, 4)} ${cleaned.slice(4, 7)} ${cleaned.slice(7)}`;
+        }
+        
+        return phone; // Return original if no format matches
     }
 };
 
