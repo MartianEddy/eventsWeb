@@ -5,15 +5,387 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EventsWeb - Stress-Free Event Rentals Across Western Kenya</title>
     <meta name="description" content="Event rentals delivered across Western Kenya - Tents, Chairs, Decor, PA Systems, Toilets for 300-5000 guests">
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- Critical CSS Inlined -->
+    <style>
+        /* Critical Above-the-fold CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --green-primary: #2d5016;
+            --green-secondary: #4a7c59;
+            --brown-primary: #8b4513;
+            --gold-primary: #ffd700;
+            --gold-secondary: #daa520;
+            --white: #ffffff;
+            --gray-light: #f8f9fa;
+            --gray-medium: #6c757d;
+            --gray-dark: #343a40;
+            --red-primary: #dc3545;
+            --red-secondary: #c82333;
+            --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-xxl: 4rem;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            color: var(--gray-dark);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        /* Urgent CTA Strip - Critical */
+        .urgent-cta-strip {
+            background: linear-gradient(135deg, var(--red-primary) 0%, var(--red-secondary) 100%);
+            color: var(--white);
+            padding: var(--spacing-sm) 0;
+            position: relative;
+            z-index: 1001;
+            box-shadow: 0 2px 10px rgba(220, 53, 69, 0.3);
+        }
+
+        .urgent-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        .urgent-text {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+            flex: 1;
+        }
+
+        .urgent-label {
+            background: var(--white);
+            color: var(--red-primary);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .urgent-btn {
+            background: var(--gold-primary);
+            color: var(--red-primary);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 15px rgba(255, 215, 0, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Header - Critical */
+        .header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: transform 0.3s ease, top 0.3s ease;
+        }
+
+        .header.with-urgent-strip {
+            top: 60px;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-sm);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-brand h1 {
+            color: var(--green-primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: none;
+            gap: var(--spacing-lg);
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--gray-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        /* Hero Section - Critical */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: calc(140px + var(--spacing-xl)) var(--spacing-sm) var(--spacing-xl);
+            background-image: url('https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=800');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(45, 80, 22, 0.7);
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(45, 80, 22, 0.8) 0%, rgba(139, 69, 19, 0.6) 100%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--white);
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-xl);
+            opacity: 0.95;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            align-items: center;
+        }
+
+        .btn {
+            padding: var(--spacing-md) var(--spacing-xl);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            min-width: 280px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: var(--gold-primary);
+            color: var(--green-primary);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        /* SVG Icon Styles */
+        .icon {
+            width: 1.2em;
+            height: 1.2em;
+            fill: currentColor;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .icon-large {
+            width: 3em;
+            height: 3em;
+        }
+
+        /* Loading placeholder for images */
+        .img-placeholder {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 8px;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 479px) {
+            .urgent-content {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+                text-align: center;
+            }
+            
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                min-width: 100%;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .nav-menu {
+                display: flex;
+            }
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+    </style>
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=800" as="image">
+    <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style.css"></noscript>
+    
+    <!-- Cache control meta tags -->
+    <meta http-equiv="Cache-Control" content="public, max-age=2592000">
+    <meta http-equiv="Expires" content="2592000">
 </head>
 <body>
+    <!-- SVG Sprite Definition -->
+    <svg style="display: none;" aria-hidden="true">
+        <defs>
+            <!-- Phone Icon -->
+            <symbol id="icon-phone" viewBox="0 0 24 24">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+            </symbol>
+            
+            <!-- WhatsApp Icon -->
+            <symbol id="icon-whatsapp" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.516"/>
+            </symbol>
+            
+            <!-- Email Icon -->
+            <symbol id="icon-email" viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </symbol>
+            
+            <!-- Location Icon -->
+            <symbol id="icon-location" viewBox="0 0 24 24">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </symbol>
+            
+            <!-- Tent Icon -->
+            <symbol id="icon-tent" viewBox="0 0 24 24">
+                <path d="M12 2L2 22h20L12 2zm0 3.84L18.16 20H5.84L12 5.84z"/>
+            </symbol>
+            
+            <!-- Chair Icon -->
+            <symbol id="icon-chair" viewBox="0 0 24 24">
+                <path d="M7 11v2h10v-2H7zm0-4h10V5H7v2zm0 8h10v-2H7v2zm-2 4h14v-2H5v2z"/>
+            </symbol>
+            
+            <!-- Sparkle Icon -->
+            <symbol id="icon-sparkle" viewBox="0 0 24 24">
+                <path d="M12 2l2.09 6.26L20 10l-5.91 1.74L12 18l-2.09-6.26L4 10l5.91-1.74L12 2z"/>
+            </symbol>
+            
+            <!-- Sound Icon -->
+            <symbol id="icon-sound" viewBox="0 0 24 24">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+            </symbol>
+            
+            <!-- Toilet Icon -->
+            <symbol id="icon-toilet" viewBox="0 0 24 24">
+                <path d="M5 2h14v2H5V2zm0 4h14v14c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2V6zm7 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+            </symbol>
+            
+            <!-- Truck Icon -->
+            <symbol id="icon-truck" viewBox="0 0 24 24">
+                <path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+            </symbol>
+            
+            <!-- Camera Icon -->
+            <symbol id="icon-camera" viewBox="0 0 24 24">
+                <path d="M12 15c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm0-8c2.76 0 5 2.24 5 5s-2.24 5-5 5-5-2.24-5-5 2.24-5 5-5zm0-1L9 4H7L5.83 2.17A.996.996 0 005 2H4c-.55 0-1 .45-1 1v1c0 .55.45 1 1 1h1.17L7 6h2l3-2 3 2h2l1.83-1.83c.24-.24.38-.56.38-.9V2c0-.55-.45-1-1-1h-1c-.28 0-.53.11-.71.29L15 3h-3z"/>
+            </symbol>
+            
+            <!-- Lightning Icon -->
+            <symbol id="icon-lightning" viewBox="0 0 24 24">
+                <path d="M11 21h-1l1-7H7.5c-.88 0-.33-.75-.31-.78C8.48 10.94 10.42 7.54 13.01 3h1.05L13 10h3.5c.49 0 .49.56.47.59-.07.15-1.98 3.4-4.97 10.41z"/>
+            </symbol>
+        </defs>
+    </svg>
+
     <!-- Urgent CTA Strip -->
     <div class="urgent-cta-strip">
         <div class="container">
             <div class="urgent-content">
                 <div class="urgent-text">
-                    <span class="urgent-label">⚡ URGENT:</span>
+                    <span class="urgent-label">
+                        <svg class="icon"><use href="#icon-lightning"></use></svg>
+                        URGENT:
+                    </span>
                     <span class="urgent-message">Need tents for Saturday? <strong>LAST AVAILABLE DATES:</strong></span>
                     <div class="available-dates">
                         <span class="date-item">July 15</span>
@@ -26,7 +398,7 @@
                 <div class="urgent-action">
                     <span class="action-arrow">→</span>
                     <a href="sms:0712345678?body=TENT" class="urgent-btn">
-                        <span class="btn-icon">📱</span>
+                        <svg class="icon"><use href="#icon-phone"></use></svg>
                         SMS 'TENT' to 0712345678
                     </a>
                 </div>
@@ -60,8 +432,14 @@
             <h2 class="hero-title">Stress-Free Event Rentals Delivered Across Western Kenya</h2>
             <p class="hero-subtitle">Tents ∙ Chairs ∙ Decor ∙ PA Systems ∙ Toilets ∙ 300-5000 Guests</p>
             <div class="hero-buttons">
-                <a href="tel:+254712345678" class="btn btn-primary">CALL NOW: 0712 345 678</a>
-                <a href="https://wa.me/254712345678?text=Hi%2C%20I%27d%20like%20to%20check%20availability%20for%20my%20event" class="btn btn-secondary">WhatsApp Availability Check</a>
+                <a href="tel:+254712345678" class="btn btn-primary">
+                    <svg class="icon"><use href="#icon-phone"></use></svg>
+                    CALL NOW: 0712 345 678
+                </a>
+                <a href="https://wa.me/254712345678?text=Hi%2C%20I%27d%20like%20to%20check%20availability%20for%20my%20event" class="btn btn-secondary">
+                    <svg class="icon"><use href="#icon-whatsapp"></use></svg>
+                    WhatsApp Availability Check
+                </a>
             </div>
         </div>
     </section>
@@ -73,23 +451,23 @@
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icons">
-                        <span class="service-icon">🏕️</span>
+                        <svg class="icon icon-large"><use href="#icon-tent"></use></svg>
                     </div>
                     <h3>Tents & Structures</h3>
                     <p>100/50/30 Seater Tents ∙ Gazebos ∙ Day/Multi-day Hire</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icons">
-                        <span class="service-icon">🪑</span>
-                        <span class="service-icon">✨</span>
+                        <svg class="icon icon-large"><use href="#icon-chair"></use></svg>
+                        <svg class="icon icon-large"><use href="#icon-sparkle"></use></svg>
                     </div>
                     <h3>Furniture & Decor</h3>
                     <p>Kenpoly Chairs w/ Spandex ∙ Tables ∙ Carpets ∙ Custom Tiebacks</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icons">
-                        <span class="service-icon">📢</span>
-                        <span class="service-icon">🚻</span>
+                        <svg class="icon icon-large"><use href="#icon-sound"></use></svg>
+                        <svg class="icon icon-large"><use href="#icon-toilet"></use></svg>
                     </div>
                     <h3>Partner Network</h3>
                     <p>PA Systems ∙ Portable Toilets ∙ Trusted Partners</p>
@@ -115,14 +493,16 @@
                 <div class="tab-content active" id="tent-setups">
                     <div class="gallery-grid">
                         <div class="gallery-item">
-                            <img src="https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=600" alt="School graduation tent setup" loading="lazy">
+                            <div class="img-placeholder" style="height: 250px;"></div>
+                            <img data-src="https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=600" alt="School graduation tent setup" loading="lazy" class="lazy-image" style="display: none;">
                             <div class="gallery-overlay">
                                 <h4>School Graduation</h4>
                                 <p>100-seater tent with stage setup</p>
                             </div>
                         </div>
                         <div class="gallery-item">
-                            <img src="https://images.pexels.com/photos/2306281/pexels-photo-2306281.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Corporate event tent" loading="lazy">
+                            <div class="img-placeholder" style="height: 250px;"></div>
+                            <img data-src="https://images.pexels.com/photos/2306281/pexels-photo-2306281.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Corporate event tent" loading="lazy" class="lazy-image" style="display: none;">
                             <div class="gallery-overlay">
                                 <h4>Corporate Meeting</h4>
                                 <p>50-seater tent with PA system</p>
@@ -135,14 +515,16 @@
                 <div class="tab-content" id="decor-examples">
                     <div class="gallery-grid">
                         <div class="gallery-item">
-                            <img src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Wedding spandex chair covers" loading="lazy">
+                            <div class="img-placeholder" style="height: 250px;"></div>
+                            <img data-src="https://images.pexels.com/photos/1024993/pexels-photo-1024993.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Wedding spandex chair covers" loading="lazy" class="lazy-image" style="display: none;">
                             <div class="gallery-overlay">
                                 <h4>Wedding Spandex</h4>
                                 <p>Custom chair covers with gold tiebacks</p>
                             </div>
                         </div>
                         <div class="gallery-item">
-                            <img src="https://images.pexels.com/photos/1616113/pexels-photo-1616113.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Table setting with decor" loading="lazy">
+                            <div class="img-placeholder" style="height: 250px;"></div>
+                            <img data-src="https://images.pexels.com/photos/1616113/pexels-photo-1616113.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Table setting with decor" loading="lazy" class="lazy-image" style="display: none;">
                             <div class="gallery-overlay">
                                 <h4>Table Decor</h4>
                                 <p>Complete table setting with linens</p>
@@ -155,14 +537,16 @@
                 <div class="tab-content" id="large-events">
                     <div class="gallery-grid">
                         <div class="gallery-item">
-                            <img src="https://images.pexels.com/photos/2747449/pexels-photo-2747449.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Large outdoor event" loading="lazy">
+                            <div class="img-placeholder" style="height: 250px;"></div>
+                            <img data-src="https://images.pexels.com/photos/2747449/pexels-photo-2747449.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Large outdoor event" loading="lazy" class="lazy-image" style="display: none;">
                             <div class="gallery-overlay">
                                 <h4>5000+ Capacity</h4>
                                 <p>Multi-tent setup for large gathering</p>
                             </div>
                         </div>
                         <div class="gallery-item">
-                            <img src="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Festival setup" loading="lazy">
+                            <div class="img-placeholder" style="height: 250px;"></div>
+                            <img data-src="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Festival setup" loading="lazy" class="lazy-image" style="display: none;">
                             <div class="gallery-overlay">
                                 <h4>Festival Setup</h4>
                                 <p>Complete infrastructure for 3000+ guests</p>
@@ -173,7 +557,9 @@
             </div>
 
             <div class="fleet-info">
-                <div class="fleet-icon">🚛</div>
+                <div class="fleet-icon">
+                    <svg class="icon icon-large"><use href="#icon-truck"></use></svg>
+                </div>
                 <p><strong>8-Vehicle Fleet:</strong> Reliable delivery across Western Kenya with our dedicated transport team</p>
             </div>
         </div>
@@ -252,12 +638,14 @@
 
             <!-- Incentive Box -->
             <div class="testimonial-incentive">
-                <div class="incentive-icon">📸</div>
+                <div class="incentive-icon">
+                    <svg class="icon icon-large"><use href="#icon-camera"></use></svg>
+                </div>
                 <div class="incentive-content">
                     <h3>Share Your Event Photos!</h3>
                     <p>Send us photos of your event via WhatsApp and receive <strong>KES 500 airtime</strong> as our thank you!</p>
                     <a href="https://wa.me/254712345678?text=Hi%2C%20I%27d%20like%20to%20share%20photos%20from%20my%20recent%20event%20for%20the%20KES%20500%20airtime%20reward" class="incentive-btn">
-                        <span class="btn-icon">📱</span>
+                        <svg class="icon"><use href="#icon-whatsapp"></use></svg>
                         Share Photos Now
                     </a>
                 </div>
@@ -274,7 +662,7 @@
                 <div class="timeline-item">
                     <div class="timeline-icon">
                         <span class="step-number">1</span>
-                        <span class="step-emoji">📞</span>
+                        <svg class="icon"><use href="#icon-phone"></use></svg>
                     </div>
                     <div class="timeline-content">
                         <h3>Call/WhatsApp Quote</h3>
@@ -296,7 +684,7 @@
                 <div class="timeline-item">
                     <div class="timeline-icon">
                         <span class="step-number">3</span>
-                        <span class="step-emoji">🚚</span>
+                        <svg class="icon"><use href="#icon-truck"></use></svg>
                     </div>
                     <div class="timeline-content">
                         <h3>Delivery + Signed Checklist</h3>
@@ -352,7 +740,8 @@
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Event planning team" loading="lazy">
+                    <div class="img-placeholder" style="height: 300px; border-radius: 12px;"></div>
+                    <img data-src="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Event planning team" loading="lazy" class="lazy-image" style="display: none; width: 100%; height: auto; border-radius: 12px;">
                 </div>
             </div>
         </div>
@@ -367,21 +756,21 @@
             <div class="contact-content">
                 <div class="contact-info">
                     <div class="contact-item">
-                        <span class="contact-icon">📍</span>
+                        <svg class="icon"><use href="#icon-location"></use></svg>
                         <div>
                             <h4>Service Area</h4>
                             <p>Western Kenya Region<br>Kisumu, Kakamega, Bungoma & Beyond</p>
                         </div>
                     </div>
                     <div class="contact-item">
-                        <span class="contact-icon">📞</span>
+                        <svg class="icon"><use href="#icon-phone"></use></svg>
                         <div>
                             <h4>Phone</h4>
                             <p>0712 345 678</p>
                         </div>
                     </div>
                     <div class="contact-item">
-                        <span class="contact-icon">✉️</span>
+                        <svg class="icon"><use href="#icon-email"></use></svg>
                         <div>
                             <h4>Email</h4>
                             <p>hello@eventsweb.co.ke</p>
@@ -392,7 +781,9 @@
                 <!-- Minimal Contact Form -->
                 <div class="quick-callback-form">
                     <div class="form-header">
-                        <div class="form-icon">⚡</div>
+                        <div class="form-icon">
+                            <svg class="icon icon-large"><use href="#icon-lightning"></use></svg>
+                        </div>
                         <h3>Request Callback in 15 Minutes</h3>
                         <p>We'll call you back with pricing and availability</p>
                     </div>
@@ -424,7 +815,7 @@
                         </div>
                         
                         <button type="submit" class="callback-btn">
-                            <span class="btn-icon">📞</span>
+                            <svg class="icon"><use href="#icon-phone"></use></svg>
                             Request Callback in 15 Mins
                         </button>
                     </form>
@@ -456,9 +847,15 @@
                 <div class="footer-social">
                     <h4>Contact</h4>
                     <div class="social-links">
-                        <a href="tel:+254712345678" aria-label="Call us">📞</a>
-                        <a href="https://wa.me/254712345678" aria-label="WhatsApp">💬</a>
-                        <a href="mailto:hello@eventsweb.co.ke" aria-label="Email">✉️</a>
+                        <a href="tel:+254712345678" aria-label="Call us">
+                            <svg class="icon"><use href="#icon-phone"></use></svg>
+                        </a>
+                        <a href="https://wa.me/254712345678" aria-label="WhatsApp">
+                            <svg class="icon"><use href="#icon-whatsapp"></use></svg>
+                        </a>
+                        <a href="mailto:hello@eventsweb.co.ke" aria-label="Email">
+                            <svg class="icon"><use href="#icon-email"></use></svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -471,11 +868,11 @@
     <!-- Sticky Contact Buttons -->
     <div class="sticky-buttons">
         <a href="https://wa.me/254712345678?text=Hi%2C%20I%27d%20like%20to%20check%20availability%20for%20my%20event" class="sticky-btn whatsapp-btn" aria-label="Contact via WhatsApp">
-            <span class="btn-icon">💬</span>
+            <svg class="icon"><use href="#icon-whatsapp"></use></svg>
             <span class="btn-text">WhatsApp</span>
         </a>
         <a href="tel:+254712345678" class="sticky-btn call-btn" aria-label="Call us">
-            <span class="btn-icon">📞</span>
+            <svg class="icon"><use href="#icon-phone"></use></svg>
             <span class="btn-text">Call Now</span>
         </a>
     </div>
